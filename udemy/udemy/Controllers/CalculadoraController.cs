@@ -64,8 +64,19 @@ namespace udemy.Controllers
         {
             if (IsNumeric(primeiroNumero) && IsNumeric(segundoNumero))
             {
-                var divisao = ConvertToDecimal(primeiroNumero) * ConvertToDecimal(segundoNumero);
+                var divisao = ConvertToDecimal(primeiroNumero) / ConvertToDecimal(segundoNumero);
                 return Ok(divisao.ToString());
+            }
+            return BadRequest("Invalid Input");
+        }
+
+        [HttpGet("raiz/{primeiroNumero}")]
+        public IActionResult GetRaiz(string primeiroNumero)
+        {
+            if (IsNumeric(primeiroNumero) )
+            {
+                var raiz =Math.Sqrt((double)ConvertToDecimal(primeiroNumero));
+                return Ok(raiz.ToString());
             }
             return BadRequest("Invalid Input");
         }
