@@ -19,8 +19,15 @@ namespace udemy.Controllers
             _logger = logger;
         }
 
+        [HttpGet]
+        public IActionResult Get()
+        {
+            var msg = "entre com o valores para realizar o calculo" ;
+            return Ok(msg.ToString());
+        }
+
         [HttpGet("sum/{primeiroNumero}/{segundoNumero}")]
-        public IActionResult Get(string primeiroNumero, string segundoNumero)
+        public IActionResult GetSum(string primeiroNumero, string segundoNumero)
         {
             if (IsNumeric(primeiroNumero) && IsNumeric(segundoNumero))
             {
@@ -29,6 +36,40 @@ namespace udemy.Controllers
             }
             return BadRequest("Invalid Input");
         }
+
+        [HttpGet("subtracao/{primeiroNumero}/{segundoNumero}")]
+        public IActionResult GetSubtracao(string primeiroNumero, string segundoNumero)
+        {
+            if (IsNumeric(primeiroNumero) && IsNumeric(segundoNumero))
+            {
+                var subtracao = ConvertToDecimal(primeiroNumero) - ConvertToDecimal(segundoNumero);
+                return Ok(subtracao.ToString());
+            }
+            return BadRequest("Invalid Input");
+        }
+
+        [HttpGet("multiplicacao/{primeiroNumero}/{segundoNumero}")]
+        public IActionResult GetMultiplicacao(string primeiroNumero, string segundoNumero)
+        {
+            if (IsNumeric(primeiroNumero) && IsNumeric(segundoNumero))
+            {
+                var multiplicacao = ConvertToDecimal(primeiroNumero) * ConvertToDecimal(segundoNumero);
+                return Ok(multiplicacao.ToString());
+            }
+            return BadRequest("Invalid Input");
+        }
+
+        [HttpGet("divisao/{primeiroNumero}/{segundoNumero}")]
+        public IActionResult GetDivisao(string primeiroNumero, string segundoNumero)
+        {
+            if (IsNumeric(primeiroNumero) && IsNumeric(segundoNumero))
+            {
+                var divisao = ConvertToDecimal(primeiroNumero) * ConvertToDecimal(segundoNumero);
+                return Ok(divisao.ToString());
+            }
+            return BadRequest("Invalid Input");
+        }
+
         private bool IsNumeric(string strNumero)
         {
             double number;
@@ -51,6 +92,6 @@ namespace udemy.Controllers
             return 0;
         }
 
-        
-    }
+
+    }    
 }
